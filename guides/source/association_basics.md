@@ -101,7 +101,7 @@ NOTE: `belongs_to` associations _must_ use the singular term. If you used the pl
 The corresponding migration might look like this:
 
 ```ruby
-class CreateBooks < ActiveRecord::Migration[5.0]
+class CreateBooks < ActiveRecord::Migration[6.0]
   def change
     create_table :authors do |t|
       t.string :name
@@ -132,7 +132,7 @@ end
 The corresponding migration might look like this:
 
 ```ruby
-class CreateSuppliers < ActiveRecord::Migration[5.0]
+class CreateSuppliers < ActiveRecord::Migration[6.0]
   def change
     create_table :suppliers do |t|
       t.string :name
@@ -176,7 +176,7 @@ NOTE: The name of the other model is pluralized when declaring a `has_many` asso
 The corresponding migration might look like this:
 
 ```ruby
-class CreateAuthors < ActiveRecord::Migration[5.0]
+class CreateAuthors < ActiveRecord::Migration[6.0]
   def change
     create_table :authors do |t|
       t.string :name
@@ -218,7 +218,7 @@ end
 The corresponding migration might look like this:
 
 ```ruby
-class CreateAppointments < ActiveRecord::Migration[5.0]
+class CreateAppointments < ActiveRecord::Migration[6.0]
   def change
     create_table :physicians do |t|
       t.string :name
@@ -304,7 +304,7 @@ end
 The corresponding migration might look like this:
 
 ```ruby
-class CreateAccountHistories < ActiveRecord::Migration[5.0]
+class CreateAccountHistories < ActiveRecord::Migration[6.0]
   def change
     create_table :suppliers do |t|
       t.string :name
@@ -345,7 +345,7 @@ end
 The corresponding migration might look like this:
 
 ```ruby
-class CreateAssembliesAndParts < ActiveRecord::Migration[5.0]
+class CreateAssembliesAndParts < ActiveRecord::Migration[6.0]
   def change
     create_table :assemblies do |t|
       t.string :name
@@ -483,7 +483,7 @@ end
 This migration can be simplified by using the `t.references` form:
 
 ```ruby
-class CreatePictures < ActiveRecord::Migration[5.0]
+class CreatePictures < ActiveRecord::Migration[6.0]
   def change
     create_table :pictures do |t|
       t.string :name
@@ -514,7 +514,7 @@ With this setup, you can retrieve `@employee.subordinates` and `@employee.manage
 In your migrations/schema, you will add a references column to the model itself.
 
 ```ruby
-class CreateEmployees < ActiveRecord::Migration[5.0]
+class CreateEmployees < ActiveRecord::Migration[6.0]
   def change
     create_table :employees do |t|
       t.references :manager
@@ -575,7 +575,7 @@ end
 This declaration needs to be backed up by a corresponding foreign key column in the books table. For a brand new table, the migration might look something like this:
 
 ```ruby
-class CreateBooks < ActiveRecord::Migration[5.0]
+class CreateBooks < ActiveRecord::Migration[6.0]
   def change
     create_table :books do |t|
       t.datetime   :published_at
@@ -589,7 +589,7 @@ end
 Whereas for an existing table, it might look like this:
 
 ```ruby
-class AddAuthorToBooks < ActiveRecord::Migration[5.0]
+class AddAuthorToBooks < ActiveRecord::Migration[6.0]
   def change
     add_reference :books, :author
   end
@@ -637,7 +637,7 @@ We pass `id: false` to `create_table` because that table does not represent a mo
 You can also use the method `create_join_table`
 
 ```ruby
-class CreateAssembliesPartsJoinTable < ActiveRecord::Migration[5.0]
+class CreateAssembliesPartsJoinTable < ActiveRecord::Migration[6.0]
   def change
     create_join_table :assemblies, :parts do |t|
       t.index :assembly_id

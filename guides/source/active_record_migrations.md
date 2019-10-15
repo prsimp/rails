@@ -35,7 +35,7 @@ history to the latest version. Active Record will also update your
 Here's an example of a migration:
 
 ```ruby
-class CreateProducts < ActiveRecord::Migration[5.0]
+class CreateProducts < ActiveRecord::Migration[6.0]
   def change
     create_table :products do |t|
       t.string :name
@@ -72,7 +72,7 @@ If you wish for a migration to do something that Active Record doesn't know how
 to reverse, you can use `reversible`:
 
 ```ruby
-class ChangeProductsPrice < ActiveRecord::Migration[5.0]
+class ChangeProductsPrice < ActiveRecord::Migration[6.0]
   def change
     reversible do |dir|
       change_table :products do |t|
@@ -87,7 +87,7 @@ end
 Alternatively, you can use `up` and `down` instead of `change`:
 
 ```ruby
-class ChangeProductsPrice < ActiveRecord::Migration[5.0]
+class ChangeProductsPrice < ActiveRecord::Migration[6.0]
   def up
     change_table :products do |t|
       t.change :price, :string
@@ -129,7 +129,7 @@ $ rails generate migration AddPartNumberToProducts
 This will create an appropriately named empty migration:
 
 ```ruby
-class AddPartNumberToProducts < ActiveRecord::Migration[5.0]
+class AddPartNumberToProducts < ActiveRecord::Migration[6.0]
   def change
   end
 end
@@ -151,7 +151,7 @@ $ rails generate migration AddPartNumberToProducts part_number:string
 will generate
 
 ```ruby
-class AddPartNumberToProducts < ActiveRecord::Migration[5.0]
+class AddPartNumberToProducts < ActiveRecord::Migration[6.0]
   def change
     add_column :products, :part_number, :string
   end
@@ -167,7 +167,7 @@ $ rails generate migration AddPartNumberToProducts part_number:string:index
 will generate
 
 ```ruby
-class AddPartNumberToProducts < ActiveRecord::Migration[5.0]
+class AddPartNumberToProducts < ActiveRecord::Migration[6.0]
   def change
     add_column :products, :part_number, :string
     add_index :products, :part_number
@@ -185,7 +185,7 @@ $ rails generate migration RemovePartNumberFromProducts part_number:string
 generates
 
 ```ruby
-class RemovePartNumberFromProducts < ActiveRecord::Migration[5.0]
+class RemovePartNumberFromProducts < ActiveRecord::Migration[6.0]
   def change
     remove_column :products, :part_number, :string
   end
@@ -201,7 +201,7 @@ $ rails generate migration AddDetailsToProducts part_number:string price:decimal
 generates
 
 ```ruby
-class AddDetailsToProducts < ActiveRecord::Migration[5.0]
+class AddDetailsToProducts < ActiveRecord::Migration[6.0]
   def change
     add_column :products, :part_number, :string
     add_column :products, :price, :decimal
@@ -220,7 +220,7 @@ $ rails generate migration CreateProducts name:string part_number:string
 generates
 
 ```ruby
-class CreateProducts < ActiveRecord::Migration[5.0]
+class CreateProducts < ActiveRecord::Migration[6.0]
   def change
     create_table :products do |t|
       t.string :name
@@ -246,7 +246,7 @@ $ rails generate migration AddUserRefToProducts user:references
 generates
 
 ```ruby
-class AddUserRefToProducts < ActiveRecord::Migration[5.0]
+class AddUserRefToProducts < ActiveRecord::Migration[6.0]
   def change
     add_reference :products, :user, foreign_key: true
   end
@@ -265,7 +265,7 @@ $ rails g migration CreateJoinTableCustomerProduct customer product
 will produce the following migration:
 
 ```ruby
-class CreateJoinTableCustomerProduct < ActiveRecord::Migration[5.0]
+class CreateJoinTableCustomerProduct < ActiveRecord::Migration[6.0]
   def change
     create_join_table :customers, :products do |t|
       # t.index [:customer_id, :product_id]
@@ -289,7 +289,7 @@ $ rails generate model Product name:string description:text
 will create a migration that looks like this
 
 ```ruby
-class CreateProducts < ActiveRecord::Migration[5.0]
+class CreateProducts < ActiveRecord::Migration[6.0]
   def change
     create_table :products do |t|
       t.string :name
@@ -317,7 +317,7 @@ $ rails generate migration AddDetailsToProducts 'price:decimal{5,2}' supplier:re
 will produce a migration that looks like this
 
 ```ruby
-class AddDetailsToProducts < ActiveRecord::Migration[5.0]
+class AddDetailsToProducts < ActiveRecord::Migration[6.0]
   def change
     add_column :products, :price, :decimal, precision: 5, scale: 2
     add_reference :products, :supplier, polymorphic: true
@@ -579,7 +579,7 @@ to reverse. You can use `reversible` to specify what to do when running a
 migration and what else to do when reverting it. For example:
 
 ```ruby
-class ExampleMigration < ActiveRecord::Migration[5.0]
+class ExampleMigration < ActiveRecord::Migration[6.0]
   def change
     create_table :distributors do |t|
       t.string :zipcode
@@ -632,7 +632,7 @@ is wise to perform the transformations in precisely the reverse order they were
 made in the `up` method. The example in the `reversible` section is equivalent to:
 
 ```ruby
-class ExampleMigration < ActiveRecord::Migration[5.0]
+class ExampleMigration < ActiveRecord::Migration[6.0]
   def up
     create_table :distributors do |t|
       t.string :zipcode
@@ -675,7 +675,7 @@ You can use Active Record's ability to rollback migrations using the `revert` me
 ```ruby
 require_relative '20121212123456_example_migration'
 
-class FixupExampleMigration < ActiveRecord::Migration[5.0]
+class FixupExampleMigration < ActiveRecord::Migration[6.0]
   def change
     revert ExampleMigration
 
@@ -693,7 +693,7 @@ is later decided it would be best to use Active Record validations,
 in place of the `CHECK` constraint, to verify the zipcode.
 
 ```ruby
-class DontUseConstraintForZipcodeValidationMigration < ActiveRecord::Migration[5.0]
+class DontUseConstraintForZipcodeValidationMigration < ActiveRecord::Migration[6.0]
   def change
     revert do
       # copy-pasted code from ExampleMigration
@@ -857,7 +857,7 @@ Several methods are provided in migrations that allow you to control all this:
 For example, this migration:
 
 ```ruby
-class CreateProducts < ActiveRecord::Migration[5.0]
+class CreateProducts < ActiveRecord::Migration[6.0]
   def change
     suppress_messages do
       create_table :products do |t|
@@ -1022,7 +1022,7 @@ to add or modify data. This is useful in an existing database that can't be dest
 and recreated, such as a production database.
 
 ```ruby
-class AddInitialProducts < ActiveRecord::Migration[5.0]
+class AddInitialProducts < ActiveRecord::Migration[6.0]
   def up
     5.times do |i|
       Product.create(name: "Product ##{i}", description: "A product.")
